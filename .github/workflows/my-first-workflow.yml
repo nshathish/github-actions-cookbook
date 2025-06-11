@@ -15,7 +15,7 @@ jobs:
           GREETER_NAME: ${{ vars.GREETER_NAME || 'Default Greeter' }}
           WHO_TO_GREET: ${{ secrets.WHO_TO_GREET || 'World' }}
         run: |
-          echo "Hello, ${{ secrets.WHO_TO_GREET || 'World' }} From ${{ github.actor }}"
+          echo "Hello, $WHO_TO_GREET From ${{ github.actor }}"
           echo "Current branch: ${{ github.ref }}"
           echo "My name is ${GREETER_NAME}"
           echo "$WHO_TO_GREET is a secret, but I can still use it in my workflow."
