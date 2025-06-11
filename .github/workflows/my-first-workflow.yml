@@ -4,3 +4,12 @@ on:
   push:
     branches: 
       - main
+
+jobs:
+  first_job:
+    name: My First Job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Greet the user
+        run: echo "Hello, World! From ${{ github.actor }}"
+        
