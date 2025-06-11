@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Greet the user
         env:
-          GREETER_NAME: ${{ var.GREETER_NAME || 'Default Greeter' }}
+          GREETER_NAME: ${{ vars.GREETER_NAME || 'Default Greeter' }}
           WHO_TO_GREET: ${{ secrets.WHO_TO_GREET || 'World' }}
         run: |
           echo "Hello, $WHO_TO_GREET From ${{ github.actor }}"
