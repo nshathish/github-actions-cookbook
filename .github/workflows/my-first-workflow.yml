@@ -28,3 +28,37 @@ jobs:
           sudo apt-get update
           sudo apt-get install tree
           tree -L 2
+
+  test_job:    
+    runs-on: ubuntu-latest
+    environment: Test
+    needs: first_job
+    steps:
+      - run: |
+          echo "Hello, ${{ vars.WHO_TO_GREET }} From ${{ github.actor }}"
+          sec=$(echo ${{ secrets.MY_SECRET }} | sed 's/./& /g')
+          echo "My Secret: $sec"
+
+  load_test_job:    
+    runs-on: ubuntu-latest
+    environment: Load-Test
+    needs: first_job
+    steps:
+      - run: |
+          echo "This is a load test job."
+          echo "It runs after the second job."
+          echo "Current branch: ${{ github.ref }}"
+          echo "My name is ${GREETER_NAME}"
+          echo "$WHO_TO_GREET is a secret, but I can still use it in my workflow."
+
+  prod_job:    
+    runs-on: ubuntu-latest
+    environment: Production
+    needs: [test_job, load_test_job]
+    steps:
+      - run: |
+          echo "This is the production job."
+          echo "It runs after the first, second, and third jobs."
+          echo "Current branch: ${{ github.ref }}"
+          echo "My name is ${GREETER_NAME}"
+          echo "$WHO_TO_GREET is a secret, but I can still use it in my workflow."
