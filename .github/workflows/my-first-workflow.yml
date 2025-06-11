@@ -11,9 +11,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Greet the user
+        env:
+          GREETER_NAME: ${{ secrets.GREETER_NAME || 'Default Greeter' }}
+          WHO_TO_GREET: ${{ secrets.WHO_TO_GREET || 'World' }}
         run: |
-          echo "Hello, World! From ${{ github.actor }}"
+          echo "Hello, $WHO_TO_GREET From ${{ github.actor }}"
           echo "Current branch: ${{ github.ref }}"
+          echo "My name is $GREETER_NAME"
 
       - name: Checkout code
         uses: actions/checkout@v4
