@@ -14,4 +14,12 @@ jobs:
         run: |
           echo "Hello, World! From ${{ github.actor }}"
           echo "Current branch: ${{ github.ref }}"
-        
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: List files using tree
+        run: |
+          sudo apt-get update
+          sudo apt-get install tree
+          tree -L 2
